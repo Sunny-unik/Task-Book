@@ -1,7 +1,7 @@
 export default function () {
   return (
     <>
-      <p>Home</p>
+      <p>Logout</p>
     </>
   );
 }
