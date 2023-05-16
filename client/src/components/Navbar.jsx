@@ -1,6 +1,4 @@
 import { NavLink } from "react-router-dom";
-import Signup from "./SignUp";
-import Logout from "./Logout";
 
 export default function Navbar() {
   const isUserSignedIn = false;
@@ -26,15 +24,11 @@ export default function Navbar() {
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           {isUserSignedIn ? (
             <li className="nav-item">
-              <NavLink to="/logout">
-                <Logout />
-              </NavLink>
+              <NavLink to="/logout">Logout</NavLink>
             </li>
           ) : (
             <li className="nav-item">
-              <NavLink to="/signup">
-                <Signup />
-              </NavLink>
+              <NavLink to="/signup">Signup</NavLink>
             </li>
           )}
         </ul>
