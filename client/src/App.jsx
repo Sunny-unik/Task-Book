@@ -7,7 +7,7 @@ import Home from "./components/Home";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <BrowserRouter>
         <Navbar />
         <Routes>
