@@ -9,3 +9,13 @@ export default interface userInterface extends Document {
   profile: string;
   cartItems: string[];
 }
+
+export interface listInterface {
+  task: string;
+  status: "done" | "progress";
+}
+
+export interface boardInterface extends Document {
+  name: string;
+  lists: listInterface[];
+}
