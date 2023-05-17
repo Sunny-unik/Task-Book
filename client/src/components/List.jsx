@@ -1,23 +1,32 @@
 import { useState } from "react";
 
 export default function List() {
-  let todoList = [
-    "complete Task",
-    "upload code to github",
-    "host project",
-    "send it to the company"
-  ];
-  const [state, setState] = useState(todoList);
+  const [state, setState] = useState([
+    "Add todo to Input",
+    "click on plus button",
+    "you can drag and drop todo to new List"
+  ]);
+
+  const drop = (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData("Node");
+
+    e.target.appendChild(document.getElementById(data));
+  };
+
+  const allowDrop = (e) => {
+    e.preventDefault();
+  };
+
+  const drag = (e) => {
+    e.dataTransfer.setData("Node", e.target.id);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputValue = e.target.input.value;
-    console.log(inputValue);
 
     inputValue && setState((currentState) => [...currentState, inputValue]);
-
-    console.log(state);
-
     e.target.input.value = "";
   };
 
@@ -25,6 +34,8 @@ export default function List() {
     <div
       className="task-list-container border p-2"
       style={{ height: "80vh", display: "flex", flexDirection: "column" }}
+      onDrop={drop}
+      onDragOver={allowDrop}
     >
       <div
         className=" "
@@ -42,11 +53,18 @@ export default function List() {
         {state &&
           Array.from(state).map((task, index) => {
             return (
-              <div className="task-name" key={index}>
+              <div
+                className="task-name"
+                key={index}
+                id={`list-item-${index}`}
+                onDragStart={drag}
+                draggable="true"
+                onDragOver={false}
+              >
                 <input
                   type="checkbox"
                   className="task-status-checkbox me-2"
-                  id={"task-status" - index}
+                  id={`task-status-${index}`}
                 />
                 <label className="bg-light" style={{ width: "14vw" }}>
                   {task}
