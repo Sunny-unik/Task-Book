@@ -4,8 +4,18 @@ import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
+  const reduxUser = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if ("/home" === window.location.pathname && !reduxUser) {
+      window.location.pathname = "/";
+    }
+  }, [reduxUser]);
+
   return (
     <div className="container">
       <BrowserRouter>

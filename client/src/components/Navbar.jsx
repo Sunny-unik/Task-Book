@@ -1,13 +1,14 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  const isUserSignedIn = false;
+  const user = useSelector((state) => state.user);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light align-item-center">
       <div className="container">
         <div className="navbar-brand">
-          <span>{isUserSignedIn ? "Welcome" : "Hello World"}</span>
+          <span>{user ? "Welcome " + user.name : "Hello World"}</span>
         </div>
         <button
           className="navbar-toggler"
@@ -22,7 +23,7 @@ export default function Navbar() {
         </button>
         <div className="flex-grow-1"></div>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          {isUserSignedIn ? (
+          {user ? (
             <li className="nav-item">
               <NavLink to="/logout">Logout</NavLink>
             </li>

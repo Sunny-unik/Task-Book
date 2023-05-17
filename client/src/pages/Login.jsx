@@ -1,25 +1,29 @@
-import axios from "axios";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { checkLogin } from "../slices/userSlice";
 
 export default function Login() {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const reduxUser = useSelector((state) => state.user);
+
+  useEffect(() => {
+    reduxUser && navigate("/home");
+  }, [reduxUser, navigate]);
 
   const handleLogin = (event) => {
     event.preventDefault();
     const [emailInput, passwordInput] = event.target.querySelectorAll("input");
 
-    axios
-      .post("http://localhost:4000/user/login", {
+    dispatch(
+      checkLogin({
         email: emailInput.value,
         password: passwordInput.value
       })
-      .then((res) => {
-        res.data.data ? navigate("/home") : alert("incorrect credential");
-      })
-      .catch((err) => console.log(err.message));
+    );
   };
 
   return (
