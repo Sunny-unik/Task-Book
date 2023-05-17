@@ -3,9 +3,7 @@ import List from "../components/List";
 export default function Home() {
   return (
     <div className="home-container d-flex">
-      <div className="d-flex overflow-x " style={{ maxWidth: "100%", "overflow-x": "auto" }}>
-        <List />
-        <List />
+      <div className="d-flex overflow-x " style={{ maxWidth: "100%", overflowX: "auto" }}>
         <List />
         <List />
         <List />
