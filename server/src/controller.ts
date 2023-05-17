@@ -26,7 +26,7 @@ export default class UserController {
     user
       .save()
       .then((user: userInterface) => res.status(200).json({ data: user }))
-      .catch((err: Error) => console.log(err));
+      .catch((err: Error) => res.json({ data: null, error: err }));
   }
 }
 

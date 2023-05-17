@@ -1,10 +1,12 @@
 import { useRef } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const nameRef = useRef("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -15,9 +17,14 @@ export default function Signup() {
         name: nameInput.value,
         email: emailInput.value,
         password: passwordInput.value
-        // boardId: res.data.data._id
       })
-      .then((res) => console.log(res.data.data))
+      .then((res) => {
+        const data = res.data.data;
+        if (data) {
+          alert("account created successfully");
+          navigate("/");
+        } else alert(res.data.error.message);
+      })
       .catch((err) => console.log(err));
   };
 

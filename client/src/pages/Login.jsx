@@ -1,21 +1,25 @@
 import axios from "axios";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
     const [emailInput, passwordInput] = event.target.querySelectorAll("input");
 
     axios
-      .post("https://localhost:4000/user/login", {
+      .post("http://localhost:4000/user/login", {
         email: emailInput.value,
         password: passwordInput.value
       })
-      .then((res) => console.log(res.data.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        res.data.data ? navigate("/home") : alert("incorrect credential");
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
