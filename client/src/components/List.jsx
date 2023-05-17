@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
-export default function List() {
+export default function List({ data }) {
   const [state, setState] = useState([
     "Add todo to Input",
     "click on plus button",
@@ -48,7 +49,7 @@ export default function List() {
         }}
       >
         <div className="list-name">
-          <p>{"List name"}</p>
+          <p>{data.name}</p>
         </div>
         {state &&
           Array.from(state).map((task, index) => {
@@ -59,7 +60,6 @@ export default function List() {
                 id={`list-item-${index}`}
                 onDragStart={drag}
                 draggable="true"
-                onDragOver={false}
               >
                 <input
                   type="checkbox"
